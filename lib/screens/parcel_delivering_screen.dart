@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:riders_food_app/screens/home_screen.dart';
 import 'package:riders_food_app/splash_screen/splash_screen.dart';
 
 import '../assistantMethods/get_current_location.dart';
@@ -73,7 +74,7 @@ class _ParcelDeliveringScreenState extends State<ParcelDeliveringScreen> {
     });
 
     Navigator.push(
-        context, MaterialPageRoute(builder: (c) => const SplashScreen()));
+        context, MaterialPageRoute(builder: (c) => const HomeScreen()));
   }
 
 //retrieve order total amount

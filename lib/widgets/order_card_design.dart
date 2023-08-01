@@ -103,7 +103,7 @@ Widget placedOrderDesignWidget(
                   ),
                   const SizedBox(width: 10),
                   Text(
-                    "\$ ",
+                    "Rs  ",
                     style: GoogleFonts.lato(
                       textStyle: const TextStyle(
                         fontSize: 18,

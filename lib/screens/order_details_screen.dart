@@ -72,7 +72,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               "Total Amount: "
-                                      "\$ " +
+                                      "Rs  " +
                                   dataMap["totalAmount"].toString(),
                               style: const TextStyle(
                                 fontSize: 24,
@@ -124,14 +124,31 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               .get(),
                           builder: (c, snapshot) {
                             return snapshot.hasData
-                                ? ShipmentAddressDesign(
-                                    model: Address.fromJson(snapshot.data!
-                                        .data()! as Map<String, dynamic>),
-                                    orderStatus: orderStatus,
-                                    orderId: widget.orderID,
-                                    sellerId: sellerId,
-                                    orderByUser: orderByUser,
-                                  )
+                                ? FutureBuilder<DocumentSnapshot>(
+                                future: FirebaseFirestore.instance
+                                    .collection("sellers")
+                                    .doc(sellerId)
+                                    .get(),
+                                builder: (c, snapshot2){
+                                  if(snapshot2.hasData){
+                                    print("myData: ${snapshot2.data!
+                                        .data()!}");
+                                  }
+                                    return snapshot2.hasData
+                                    ? ShipmentAddressDesign(
+                                        model: Address.fromJson(snapshot.data!
+                                            .data()! as Map<String, dynamic>),
+                                        orderStatus: orderStatus,
+                                        orderId: widget.orderID,
+                                        sellerId: sellerId,
+                                        orderByUser: orderByUser,
+                                      seller: snapshot2.data!
+                                          .data()! as Map<String, dynamic>,
+                                      ):Center(
+                                      child: circularProgress(),
+                                    );
+                                  }
+                                )
                                 : Center(
                                     child: circularProgress(),
                                   );

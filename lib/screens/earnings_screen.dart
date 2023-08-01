@@ -20,7 +20,7 @@ class _EarningsScreenState extends State<EarningsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "\$" + previousRiderEarnings,
+                "Rs " + previousRiderEarnings,
                 style: const TextStyle(
                   fontSize: 80,
                   color: Colors.black,
@@ -48,16 +48,18 @@ class _EarningsScreenState extends State<EarningsScreen> {
               const SizedBox(height: 40),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const SplashScreen())));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: ((context) => const SplashScreen())));
+
+                Navigator.pop(context);
                 },
                 child: const Card(
                   color: Colors.white,
                   margin: EdgeInsets.symmetric(
                     vertical: 40,
-                    horizontal: 140,
+                    horizontal: 100,
                   ),
                   child: ListTile(
                     leading: Icon(

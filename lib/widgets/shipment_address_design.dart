@@ -5,6 +5,7 @@ import 'package:riders_food_app/screens/parcel_picking_screen.dart';
 
 import '../global/global.dart';
 import '../models/address.dart';
+import '../screens/home_screen.dart';
 import '../splash_screen/splash_screen.dart';
 
 class ShipmentAddressDesign extends StatelessWidget {
@@ -13,6 +14,7 @@ class ShipmentAddressDesign extends StatelessWidget {
   final String? orderId;
   final String? sellerId;
   final String? orderByUser;
+  final Map<String,dynamic>? seller;
 
   const ShipmentAddressDesign({
     Key? key,
@@ -21,6 +23,7 @@ class ShipmentAddressDesign extends StatelessWidget {
     this.orderId,
     this.sellerId,
     this.orderByUser,
+    this.seller
   }) : super(key: key);
 
   confirmedParcelShipment(BuildContext context, String getOrderID,
@@ -61,6 +64,56 @@ class ShipmentAddressDesign extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.all(10.0),
           child: Text(
+            "PickUp Details: ",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 5),
+          width: MediaQuery.of(context).size.width,
+          child: Table(
+            children: [
+              TableRow(
+                children: [
+                  const Text(
+                    "-Name",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(seller!['sellerName']),
+                ],
+              ),
+              TableRow(
+                children: [
+                  const Text(
+                    "-Phone Number",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(seller!['phone']),
+                ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Text(
+          seller!['address'],
+            textAlign: TextAlign.justify,
+          ),
+        ),
+
+        Divider(),
+        const Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Text(
             "Shipping Details: ",
             style: TextStyle(
               color: Colors.black,
@@ -68,6 +121,9 @@ class ShipmentAddressDesign extends StatelessWidget {
             ),
           ),
         ),
+
+
+
         const SizedBox(height: 6),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 90, vertical: 5),
@@ -157,7 +213,7 @@ class ShipmentAddressDesign extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: ((context) => const SplashScreen()),
+                    builder: ((context) => const HomeScreen()),
                   ),
                 );
               },
